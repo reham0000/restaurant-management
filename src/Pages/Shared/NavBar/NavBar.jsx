@@ -25,6 +25,7 @@ const NavBar = () => {
 
       {user ? (
         <>
+        <span>{user?.displayName}</span>
           <button onClick={handleLogOut} className="ml-2">
             LogOut
           </button>
