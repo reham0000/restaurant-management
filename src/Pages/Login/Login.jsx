@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from "react";
+import googleLogo from '../../assets/icon/icons8-google-logo-48.png'
 import {
   loadCaptchaEnginge,
   LoadCanvasTemplate,
@@ -8,10 +9,13 @@ import { AuthContext } from "../../Providers/AuthProvider";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import Swal from "sweetalert2";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { auth } from "../../firebase/firebase.config";
 
 const Login = () => {
   const [disabled, setDisabled] = useState(true);
   const { signIn } = useContext(AuthContext);
+  const googleProvider = new GoogleAuthProvider();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -27,11 +31,11 @@ const Login = () => {
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(email, password);
+    // console.log(email, password);
 
     signIn(email, password).then((result) => {
       const user = result.user;
-      console.log(user);
+      // console.log(user);
       Swal.fire({
         title: "User Login Successful.",
         showClass: {
@@ -52,6 +56,15 @@ const Login = () => {
       navigate(from, { replace: true });
     });
   };
+
+  const handleGoogleSignIn = () => {
+    signInWithPopup(auth, googleProvider)
+    .then(result => {
+      console.log(result.user);
+      navigate(from, { replace: true });  
+    })
+    .catch(error => console.log('ERROR', error));
+  }
 
   const handleValidateCaptcha = (e) => {
     const user_captcha_value = e.target.value;
@@ -129,6 +142,8 @@ const Login = () => {
                   value="Login"
                 />
               </div>
+              <button onClick={handleGoogleSignIn}><img className="w-10 mx-auto"  src={googleLogo} alt="" /></button>
+              
             </form>
             <p>
               <small className="pl-5">
