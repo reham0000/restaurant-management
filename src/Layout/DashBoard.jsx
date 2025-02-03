@@ -1,60 +1,97 @@
 import {
-
+  FaBook,
   FaCartShopping,
   FaEnvelope,
   FaHouseMedical,
   FaList,
+  FaUsers,
+  FaUtensils,
 } from "react-icons/fa6";
-import { MdOutlineReviews,MdMenuBook  } from "react-icons/md";
+import { MdOutlineReviews, MdMenuBook } from "react-icons/md";
 import { TbReservedLine } from "react-icons/tb";
 import { NavLink, Outlet } from "react-router-dom";
 import useCart from "../hooks/useCart";
 
 const DashBoard = () => {
+  const [cart] = useCart();
 
-    const [cart] = useCart();
-
-    // TODO: get isAdmin value from the database.
-    const isAdmin = true;
+  // TODO: get isAdmin value from the database.
+  const isAdmin = true;
 
   return (
     <div className="flex">
-        
       {/* dashboard side bar */}
       <div className="w-64 min-h-screen bg-orange-400">
-      <h1 className="text-4xl font-semibold p-2 text-center">Tasty Treat</h1>
-      <p className="text-xl font-semibold text-center">Restaurant</p>
+        <h1 className="text-4xl font-semibold p-2 text-center">Tasty Treat</h1>
+        <p className="text-xl font-semibold text-center">Restaurant</p>
         <ul className="menu p-4">
-          <li>
-            <NavLink to="/dashboard/userHome">
+          {isAdmin ? (
+            <>
+              <li>
+            <NavLink to="/dashboard/adminHome">
               {" "}
-              <FaHouseMedical></FaHouseMedical>User Home
+              <FaHouseMedical></FaHouseMedical>Admin Home
             </NavLink>
           </li>
           <li>
-            <NavLink to="/dashboard/reservation">
+            <NavLink to="/dashboard/addItems">
               {" "}
-              <TbReservedLine /> Reservation
+              <FaUtensils></FaUtensils> Add Items
             </NavLink>
           </li>
           <li>
-            <NavLink to="/dashboard/cart">
-              <FaCartShopping></FaCartShopping> My Cart ({cart.length})
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/dashboard/review">
-              {" "}
-              <MdOutlineReviews />
-              Add a Review
+            <NavLink to="/dashboard/manageItems">
+              <FaList></FaList> Manage Items
             </NavLink>
           </li>
           <li>
             <NavLink to="/dashboard/bookings">
               {" "}
-              <FaList></FaList> My Booking
+              <FaBook></FaBook>
+              Manage Bookings
             </NavLink>
           </li>
+          <li>
+            <NavLink to="/dashboard/users">
+              {" "}
+              <FaUsers></FaUsers> All Users
+            </NavLink>
+          </li>
+            </>
+          ) : (
+            <>
+              <li>
+                <NavLink to="/dashboard/userHome">
+                  {" "}
+                  <FaHouseMedical></FaHouseMedical>User Home
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashboard/reservation">
+                  {" "}
+                  <TbReservedLine /> Reservation
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashboard/cart">
+                  <FaCartShopping></FaCartShopping> My Cart ({cart.length})
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashboard/review">
+                  {" "}
+                  <MdOutlineReviews />
+                  Add a Review
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashboard/bookings">
+                  {" "}
+                  <FaList></FaList> My Booking
+                </NavLink>
+              </li>
+            </>
+          )}
           {/* shared nav links */}
           <div className="divider"></div>
           <li>
