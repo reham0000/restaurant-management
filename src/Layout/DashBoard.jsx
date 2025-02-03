@@ -1,6 +1,7 @@
 import {
 
   FaCartShopping,
+  FaEnvelope,
   FaHouseMedical,
   FaList,
 } from "react-icons/fa6";
@@ -12,6 +13,9 @@ import useCart from "../hooks/useCart";
 const DashBoard = () => {
 
     const [cart] = useCart();
+
+    // TODO: get isAdmin value from the database.
+    const isAdmin = true;
 
   return (
     <div className="flex">
@@ -51,6 +55,7 @@ const DashBoard = () => {
               <FaList></FaList> My Booking
             </NavLink>
           </li>
+          {/* shared nav links */}
           <div className="divider"></div>
           <li>
             <NavLink to="/">
@@ -62,6 +67,12 @@ const DashBoard = () => {
             <NavLink to="/order/salad">
               {" "}
               <MdMenuBook /> Menu
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/order/contact">
+              {" "}
+              <FaEnvelope></FaEnvelope> Contact
             </NavLink>
           </li>
         </ul>

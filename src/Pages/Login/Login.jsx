@@ -11,11 +11,12 @@ import { Helmet } from "react-helmet";
 import Swal from "sweetalert2";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "../../firebase/firebase.config";
+import SocialLogin from "../../Components/SocialLogin/SocialLogin";
 
 const Login = () => {
   const [disabled, setDisabled] = useState(true);
   const { signIn } = useContext(AuthContext);
-  const googleProvider = new GoogleAuthProvider();
+  // const googleProvider = new GoogleAuthProvider();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -57,14 +58,14 @@ const Login = () => {
     });
   };
 
-  const handleGoogleSignIn = () => {
-    signInWithPopup(auth, googleProvider)
-    .then(result => {
-      console.log(result.user);
-      navigate(from, { replace: true });  
-    })
-    .catch(error => console.log('ERROR', error));
-  }
+  // const handleGoogleSignIn = () => {
+  //   signInWithPopup(auth, googleProvider)
+  //   .then(result => {
+  //     console.log(result.user);
+  //     navigate(from, { replace: true });  
+  //   })
+  //   .catch(error => console.log('ERROR', error));
+  // }
 
   const handleValidateCaptcha = (e) => {
     const user_captcha_value = e.target.value;
@@ -142,8 +143,8 @@ const Login = () => {
                   value="Login"
                 />
               </div>
-              <button onClick={handleGoogleSignIn}><img className="w-10 mx-auto"  src={googleLogo} alt="" /></button>
-              
+              {/* <button onClick={handleGoogleSignIn}><img className="w-10 mx-auto"  src={googleLogo} alt="" /></button> */}
+              <SocialLogin></SocialLogin>
             </form>
             <p>
               <small className="pl-5">
@@ -155,6 +156,7 @@ const Login = () => {
             </p>
           </div>
         </div>
+        
       </div>
     </>
   );
