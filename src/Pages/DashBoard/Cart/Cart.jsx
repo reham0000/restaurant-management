@@ -2,6 +2,7 @@ import { MdDeleteForever } from "react-icons/md";
 import useCart from "../../../hooks/useCart";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const [cart, refetch] = useCart();
@@ -36,9 +37,13 @@ const Cart = () => {
   return (
     <div>
       <div className="flex justify-evenly mb-8">
-        <h2 className="text-4xl">Items: {cart.length}</h2>
-        <h2 className="text-4xl">Total Price: {totalPrice}</h2>
-        <button className="btn btn-primary">Pay</button>
+        <h2 className="text-4xl font-semibold">Items: {cart.length}</h2>
+        <h2 className="text-4xl font-semibold">Total Price: {totalPrice}</h2>
+        {cart.length ?<Link to="/dashboard/payment">
+          <button className="btn font-serif bg-orange-400">Pay</button>
+        </Link>
+         : <button disabled className="btn font-serif bg-orange-400">Pay</button>
+        }
       </div>
       <div className="overflow-x-auto">
         <table className="table w-full">
