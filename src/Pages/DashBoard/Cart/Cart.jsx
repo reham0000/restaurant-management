@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const Cart = () => {
   const [cart, refetch] = useCart();
-  const totalPrice = cart.reduce((total, item) => total + item.price, 0);
+  const totalPrice = cart.reduce((total, item) => total + item.price, 0).toFixed(2);
   const axiosSecure = useAxiosSecure();
 
   const handleDelete = (id) => {
@@ -50,11 +50,11 @@ const Cart = () => {
           {/* head */}
           <thead>
             <tr>
-              <th>#</th>
+              <th>No.</th>
               <th>Image</th>
               <th>Name</th>
               <th>Price</th>
-              <th>Action</th>
+              <th>Delete</th>
             </tr>
           </thead>
           <tbody>
@@ -85,6 +85,7 @@ const Cart = () => {
           </tbody>
         </table>
       </div>
+      
     </div>
   );
 };

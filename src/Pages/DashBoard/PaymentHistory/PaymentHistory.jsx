@@ -34,9 +34,10 @@ const PaymentHistory = () => {
             {payments.map((payment, index) => (
               <tr key={payment._id}>
                 <th>{index + 1}</th>
-                <td>${payment.price}</td>
+                <td>${payment.price.toFixed(3)}</td>
                 <td>{payment.transactionId}</td>
-                <td>{payment.status}</td>
+                {/* <td>{payment.status}</td> */}
+                <td>Success</td>
               </tr>
             ))}
           </tbody>

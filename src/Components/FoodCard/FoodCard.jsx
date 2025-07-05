@@ -17,11 +17,12 @@ const FoodCard = ({ item }) => {
       // send cart item to the database
       const cartItem = {
         menuId: _id,
-        email: user.email,
+        email: user?.email,
         name,
         image,
         price,
       };
+
       axiosSecure.post("/carts", cartItem).then((res) => {
         console.log(res.data);
         if (res.data.insertedId) {

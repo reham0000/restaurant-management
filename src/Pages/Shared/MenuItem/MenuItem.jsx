@@ -2,7 +2,7 @@
 
 const MenuItem = ({item}) => {
 
-    const {image, price, recipe, name} = item;
+const {image, price, recipe, name} = item;
 
     return (
         <div className="flex space-x-2">

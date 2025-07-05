@@ -17,6 +17,8 @@ import Payment from "../Pages/DashBoard/Payment/Payment";
 import PaymentHistory from "../Pages/DashBoard/PaymentHistory/PaymentHistory";
 import UserHome from "../Pages/DashBoard/userHome/userHome";
 import AdminHome from "../Pages/DashBoard/AdminHome/AdminHome";
+import ManageBookings from "../Pages/DashBoard/ManageBookings/ManageBookings";
+import ReservationPage from "../Pages/DashBoard/ReservationPage/ReservationPage";
 
 export const router = createBrowserRouter([
   {
@@ -56,7 +58,7 @@ export const router = createBrowserRouter([
       // normal user routes
       {
         path: "userHome",
-        element: <UserHome></UserHome>
+        element: <UserHome></UserHome>,
       },
       {
         path: "cart",
@@ -64,17 +66,25 @@ export const router = createBrowserRouter([
       },
       {
         path: "payment",
-        element: <Payment></Payment>  
+        element: <Payment></Payment>,
       },
       {
         path: "paymentHistory",
-        element: <PaymentHistory></PaymentHistory>
+        element: <PaymentHistory></PaymentHistory>,
+      },
+      {
+        path: "reservation",
+        element: <ReservationPage></ReservationPage>,
       },
 
       // admin only routes
       {
         path: "adminHome",
-        element: <AdminRoute><AdminHome></AdminHome></AdminRoute>
+        element: (
+          <AdminRoute>
+            <AdminHome></AdminHome>
+          </AdminRoute>
+        ),
       },
       {
         path: "addItems",
@@ -99,13 +109,22 @@ export const router = createBrowserRouter([
             <UpdateItem></UpdateItem>
           </AdminRoute>
         ),
-        loader: ({ params }) => fetch(`http://localhost:5000/menu/${params.id}`),
+        loader: ({ params }) =>
+          fetch(`https://y-chi-flame.vercel.app/menu/${params.id}`),
       },
       {
         path: "users",
         element: (
           <AdminRoute>
             <AllUsers></AllUsers>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "bookings",
+        element: (
+          <AdminRoute>
+            <ManageBookings></ManageBookings>
           </AdminRoute>
         ),
       },
